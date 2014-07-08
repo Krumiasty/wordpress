@@ -10,7 +10,7 @@
  */
 wp_footer();
 ?>
-<body>
+
 
 
 </body>

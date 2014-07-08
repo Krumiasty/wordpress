@@ -11,13 +11,14 @@
  * @since Twenty Fourteen 1.0
  */
 
-get_header(); 
+get_header();?> 
 
+<?php
 while(have_posts() ):the_post();
 	the_content();
 endwhile;?>
 
-hhh
+
 <?php get_footer();
 
 ?>
