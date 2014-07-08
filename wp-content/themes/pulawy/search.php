@@ -3,7 +3,7 @@
  * The template for displaying Search Results pages
  *
  * @package WordPress
- * @subpackage Twenty_Fourteen
+ * @subpackage pulawy
  * @since Twenty Fourteen 1.0
  */
 
