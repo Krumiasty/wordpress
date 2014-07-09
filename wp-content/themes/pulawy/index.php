@@ -73,7 +73,10 @@ wp_reset_postdata();
         </script>  
         <div id="mapka" style="width: 700px; height: 500px; border: 1px solid black; background: gray;">  
         <!-- tu będzie mapa -->  
-        </div>    
+        </div> 
+        <div>
+        	
+        </div>   
 <?php
 get_footer();
 ?>
