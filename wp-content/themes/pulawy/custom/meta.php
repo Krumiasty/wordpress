@@ -4,23 +4,22 @@
         </div> 
      <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
       <script type="text/javascript">  
-        <!--
+         window.onload = mapaStart();
             var mapa; // obiekt globalny
+
             function mapaStart() 
             { 
-             //  alert('goo');
-                // tworzymy mapę satelitarną i centrujemy w okolicy Szczecina na poziomie zoom = 10
+                // tworzymy mapę satelitarną i centrujemy w okolicy Pulaw na poziomie zoom = 10
                 var wspolrzedne = new google.maps.LatLng(51.418886, 21.969609);
                 var opcjeMapy = {
                     zoom: 10,
                     center: wspolrzedne,
-           //         mapTypeId: google.maps.MapTypeId.SATELLITE
                 };
                 mapa = new google.maps.Map(document.getElementById("mapka"), opcjeMapy);
                  
                 // stworzenie markera
-                var punkt  = new google.maps.LatLng(51.418886, 21.969609);  
-                var opcjeMarkera =
+               // var punkt  = new google.maps.LatLng(51.418886, 21.969609);  
+            /*    var opcjeMarkera =
                 {
                     position: punkt,
                     map: mapa,
@@ -28,15 +27,47 @@
                     clickable: true,
                 }
                 var marker = new google.maps.Marker(opcjeMarkera);
-            } ;
-        mapaStart();
+            */
+
+                google.maps.event.addListener(mapa, "click", function(event)
+                {
+                    marker = new google.maps.Marker(
+                    {
+                        position: event.latLng,
+                        map: mapa,
+                    }
+                    );
+                    var latlng_num = event.latLng;
+                  
+                 /*   google.maps.event.addListener(marker, "click", function()
+                    {
+                        infowindow.open(mapa, marker);
+                        
+                    }
+                    );*/
+
+                    coords = document.getElementById("xx");
+                    coords.value = latlng_num;
+                }
+                );
+                      
+    
+        /*        var html = "<table>" + "<tr><td>x </td> <td><form><input type='text' id='x'/> </td> </tr>" 
+                            + "<tr><td> y </td> <td><input type='text' id='y'/> </td> </tr></form>";
+                infowindow = new google.maps.InfoWindow(
+                {
+                    content: html
+                });*/
+
+            } ; 
+       
         </script>
     <p> </p>
  
     <label>Name</label>
  
     <p>
-        <input type="text" name="_my_meta[name]" value="<?php if(!empty($meta['name'])) echo $meta['name']; ?>"/>
+        <input id="xx" type="text" name="_my_meta[name]" value="<?php if(!empty($meta['name'])) echo $meta['name']; ?>"/>
         <span>Enter in a name</span>
     </p>
  
