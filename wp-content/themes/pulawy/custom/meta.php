@@ -6,7 +6,7 @@
       <script type="text/javascript">  
          window.onload = mapaStart();
             var mapa; // obiekt globalny
-
+            var flag = true;
             function mapaStart() 
             { 
                 // tworzymy mapę satelitarną i centrujemy w okolicy Pulaw na poziomie zoom = 10
@@ -27,18 +27,28 @@
                     clickable: true,
                 }
                 var marker = new google.maps.Marker(opcjeMarkera);
-            */
-
+            */  
+                
                 google.maps.event.addListener(mapa, "click", function(event)
-                {
-                    marker = new google.maps.Marker(
+                {   
+                    if(flag == false)
                     {
-                        position: event.latLng,
-                        map: mapa,
+                        marker.setMap(null);
+                        flag = true;
                     }
-                    );
-                    var latlng_num = event.latLng;
+                    while(flag)
+                    {
+                        marker = new google.maps.Marker(
+                        {
+                            position: event.latLng,
+                            map: mapa,
+                        }
+                        );
+                        var latlng_num = event.latLng;
+                        flag = false;
+                    }
                   
+                    
                  /*   google.maps.event.addListener(marker, "click", function()
                     {
                         infowindow.open(mapa, marker);
@@ -50,7 +60,6 @@
                     coords.value = latlng_num;
                 }
                 );
-                      
     
         /*        var html = "<table>" + "<tr><td>x </td> <td><form><input type='text' id='x'/> </td> </tr>" 
                             + "<tr><td> y </td> <td><input type='text' id='y'/> </td> </tr></form>";
