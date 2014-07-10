@@ -27,4 +27,4 @@ wp_head();
 	<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>    
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />        
 </head>
-<body onload="mapaStart()">
+<body>
