@@ -60,27 +60,18 @@
                     coords.value = latlng_num;
                 }
                 );
-    
-        /*        var html = "<table>" + "<tr><td>x </td> <td><form><input type='text' id='x'/> </td> </tr>" 
-                            + "<tr><td> y </td> <td><input type='text' id='y'/> </td> </tr></form>";
-                infowindow = new google.maps.InfoWindow(
-                {
-                    content: html
-                });*/
-
-            } ; 
+            }; 
        
         </script>
     <p> </p>
- 
-    <label>Name</label>
- 
+    <label>Współrzędne</label>
+    <!-- " -->
     <p>
         <input id="xx" type="text" name="_my_meta[name]" value="<?php if(!empty($meta['name'])) echo $meta['name']; ?>"/>
-        <span>Enter in a name</span>
+    <!--    <span>wpowadzone współrzędne</span> -->
     </p>
  
-    <label>Description <span>(optional)</span></label>
+    <label>Opis <span>(optional)</span></label>
  
     <p>
         <textarea name="_my_meta[description]" rows="3">

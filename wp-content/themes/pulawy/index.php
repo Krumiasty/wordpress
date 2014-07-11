@@ -35,19 +35,59 @@ get_header();
         <div>
               <div>
                <?php
-                //  var i = 0;
-                $custom_fields = get_post_custom(2);
-                $my_custom_field = $custom_fields['_my_meta'];
-                foreach ( $my_custom_field as $key => $value ) 
+               $args=array(
+                'post_type'=> 'page',
+                );
+
+                // The Query
+                $the_query = new WP_Query( $args );
+
+                // The Loop
+                if ( $the_query->have_posts() ) 
                 {
-                    echo $value[1][0] . "<br />";
+                    echo '<ul>';
+                    while ( $the_query->have_posts() ) 
+                    {
+                        $the_query->the_post();
+
+                      $tmp = get_post_meta($post ->ID, '_my_meta', TRUE);
+                      foreach($tmp as $tmp_meta)
+                        {
+                            echo '<li>' . $tmp_meta . '</li>';
+                        }
+                    }
+                    echo '</ul>';
                 }
-                $my_meta = get_post_meta($post->ID,’_my_meta’,TRUE);
-                echo $my_meta['number'];
-               // while()
-             //   {
-             //       if($value[i] >)
-            //    }
+                else 
+                {
+                    echo 'no posts found';
+                }
+                    /* Restore original Post Data */
+                wp_reset_postdata();
+
+
+
+                //$custom_fields = get_post_custom(2);
+                //$my_custom_field = $custom_fields['_my_meta'];
+
+
+
+               // foreach ( $my_custom_field as $key => $value ) 
+               // {
+               //     echo $value[10][0] . "<br />";
+               // }
+              /*  $i = 0;
+                $j = 0;
+                while(!empty($value))
+                {
+                   if($value[i] >= '48' && $value[i] <= '57' && $value[i] == '46')
+                   {
+                        $coords[j] = $value[i];
+                        $j++;
+                   }
+                   $i++;
+                }
+                echo $coords;*/
               /*  $meta_value = get_post_custom_values( '_my_meta' );
                 foreach ( $meta_value as $key => $value ) 
                 {
