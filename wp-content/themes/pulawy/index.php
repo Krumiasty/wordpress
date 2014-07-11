@@ -27,6 +27,14 @@ get_header();
                 }
                 var marker = new google.maps.Marker(opcjeMarkera);*/
             } 
+
+            function drawMarker(lat, lng, options)
+            {
+                options.position = new google.maps.LatLng(lat, lng);
+
+                options.map = mapa;
+                var marker = new google.maps.Marker(options);
+            }
         -->
         </script>  
         <div id="mapka" style="width: 700px; height: 500px; border: 1px solid black; background: gray;">  
@@ -34,70 +42,11 @@ get_header();
         </div> 
         <div>
               <div>
-               <?php
-               $args=array(
-                'post_type'=> 'page',
-                );
-
-                // The Query
-                $the_query = new WP_Query( $args );
-
-                // The Loop
-                if ( $the_query->have_posts() ) 
-                {
-                    echo '<ul>';
-                    while ( $the_query->have_posts() ) 
-                    {
-                        $the_query->the_post();
-
-                      $tmp = get_post_meta($post ->ID, '_my_meta', TRUE);
-                      foreach($tmp as $tmp_meta)
-                        {
-                            echo '<li>' . $tmp_meta . '</li>';
-                        }
-                    }
-                    echo '</ul>';
-                }
-                else 
-                {
-                    echo 'no posts found';
-                }
-                    /* Restore original Post Data */
-                wp_reset_postdata();
-
-
-
-                //$custom_fields = get_post_custom(2);
-                //$my_custom_field = $custom_fields['_my_meta'];
-
-
-
-               // foreach ( $my_custom_field as $key => $value ) 
-               // {
-               //     echo $value[10][0] . "<br />";
-               // }
-              /*  $i = 0;
-                $j = 0;
-                while(!empty($value))
-                {
-                   if($value[i] >= '48' && $value[i] <= '57' && $value[i] == '46')
-                   {
-                        $coords[j] = $value[i];
-                        $j++;
-                   }
-                   $i++;
-                }
-                echo $coords;*/
-              /*  $meta_value = get_post_custom_values( '_my_meta' );
-                foreach ( $meta_value as $key => $value ) 
-                {
-                    echo "$key  => $value ( '_my_meta' )<br />"; 
-                }
-                */
-               ?>
+               
                 </div>
             <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
             <script type="text/javascript">  
+
         	   window.onload = mapaStart();
                var marker;
 
@@ -116,23 +65,52 @@ get_header();
                         }
                         );
                     }
-                }
+                } */
 
-                google.maps.event.addListener(mapa, 'click', function(event) 
-                {
-                    placeMarker(event.latLng);
-                }
-                );*/
-              
-                var tmp = new Array(51.418886, 21.969609);
-                var myLatlng = new google.maps.LatLng(tmp[0],tmp[1]);
-                alert(tmp);
-                marker = new google.maps.Marker(
-                {
-                    position: myLatlng,
-                    map: mapa,
-                }
+                <?php
+                $args=array(
+                'post_type'=> 'page',
                 );
+
+                // The Query
+                $the_query = new WP_Query( $args );
+
+                // The Loop
+                if ( $the_query->have_posts() ) 
+                {
+                    
+                    while ( $the_query->have_posts() ) 
+                    {
+                        $the_query->the_post();
+
+                      $tmp = get_post_meta($post ->ID, '_my_meta', true);
+                      foreach($tmp as $tmp_meta)
+                        {
+                            $tmp_meta = substr($tmp_meta, 0, (strlen($tmp_meta)-1));
+                            echo 'drawMarker' . $tmp_meta .',{});';
+                        }
+                    }
+                }
+                else 
+                {
+                    echo 'no posts found';
+                }
+                    /* Restore original Post Data */
+                wp_reset_postdata();
+
+               ?>
+
+                   /* var myLatlng = new google.maps.LatLng(tmp[i],tmp[1]);
+                    marker = new google.maps.Marker(
+                    {
+                        position: myLatlng,
+                        map: mapa,
+                    }
+                    );*/
+
+
+              //  }
+
             </script>
         </div>   
 <?php
