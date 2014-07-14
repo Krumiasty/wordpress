@@ -12,23 +12,11 @@
                 // tworzymy mapę satelitarną i centrujemy w okolicy Pulaw na poziomie zoom = 10
                 var wspolrzedne = new google.maps.LatLng(51.418886, 21.969609);
                 var opcjeMapy = {
-                    zoom: 10,
+                    zoom: 11,
                     center: wspolrzedne,
                 };
                 mapa = new google.maps.Map(document.getElementById("mapka"), opcjeMapy);
-                 
-                // stworzenie markera
-               // var punkt  = new google.maps.LatLng(51.418886, 21.969609);  
-            /*    var opcjeMarkera =
-                {
-                    position: punkt,
-                    map: mapa,
-                    draggable: true,
-                    clickable: true,
-                }
-                var marker = new google.maps.Marker(opcjeMarkera);
-            */  
-                
+
                 google.maps.event.addListener(mapa, "click", function(event)
                 {   
                     if(flag == false)
@@ -70,13 +58,9 @@
         <input id="xx" type="text" name="_my_meta[name]" value="<?php if(!empty($meta['name'])) echo $meta['name']; ?>"/>
     <!--    <span>wpowadzone współrzędne</span> -->
     </p>
- 
-    <label>Opis <span>(optional)</span></label>
- 
+    <label>Opis</label>
     <p>
         <textarea name="_my_meta[description]" rows="3">
             <?php if(!empty($meta['description'])) echo $meta['description']; ?></textarea>
-        <span>Enter in a description</span>
     </p>
- 
 </div>

@@ -21,7 +21,7 @@ function my_meta_init()
     // add a meta box for each of the wordpress page types: posts and pages
     foreach (array('post','page') as $type)
     {
-        add_meta_box('my_all_meta', 'My Custom Meta Box', 'my_meta_setup', $type, 'normal', 'high');
+        add_meta_box('my_all_meta', 'Mapa', 'my_meta_setup', $type, 'normal', 'high');
     }
      
     // add a callback function to save any data a user enters in

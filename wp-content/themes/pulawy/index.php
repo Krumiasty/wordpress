@@ -3,29 +3,17 @@ get_header();
 ?>
            
         <script type="text/javascript">  
-        <!--
             var mapa; // obiekt globalny
             function mapaStart() 
             { 
                 // tworzymy mapę satelitarną i centrujemy w okolicy Szczecina na poziomie zoom = 10
                 var wspolrzedne = new google.maps.LatLng(51.418886, 21.969609);
                 var opcjeMapy = {
-                    zoom: 10,
+                    zoom: 11,
                     center: wspolrzedne,
-           //         mapTypeId: google.maps.MapTypeId.SATELLITE
                 };
                 mapa = new google.maps.Map(document.getElementById("mapka"), opcjeMapy);
                  
-                // stworzenie markera
-    /*            var punkt  = new google.maps.LatLng(51.418886, 21.969609);  
-                var opcjeMarkera =
-                {
-                    position: punkt,
-                    map: mapa,
-                    draggable: true,
-                    clickable: true,
-                }
-                var marker = new google.maps.Marker(opcjeMarkera);*/
             } 
 
             function drawMarker(lat, lng, options)
@@ -35,7 +23,6 @@ get_header();
                 options.map = mapa;
                 var marker = new google.maps.Marker(options);
             }
-        -->
         </script>  
         <div id="mapka" style="width: 700px; height: 500px; border: 1px solid black; background: gray;">  
         <!-- tu będzie mapa -->  
@@ -49,23 +36,6 @@ get_header();
 
         	   window.onload = mapaStart();
                var marker;
-
-        /*        function placeMarker(location)
-                {
-                    if ( marker )
-                    {
-                        marker.setPosition(location);
-                    } 
-                    else 
-                    {
-                        marker = new google.maps.Marker(
-                        {
-                        position: location,
-                        map: mapa
-                        }
-                        );
-                    }
-                } */
 
                 <?php
                 $args=array(
@@ -99,17 +69,6 @@ get_header();
                 wp_reset_postdata();
 
                ?>
-
-                   /* var myLatlng = new google.maps.LatLng(tmp[i],tmp[1]);
-                    marker = new google.maps.Marker(
-                    {
-                        position: myLatlng,
-                        map: mapa,
-                    }
-                    );*/
-
-
-              //  }
 
             </script>
         </div>   
