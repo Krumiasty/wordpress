@@ -24,6 +24,12 @@ get_header();?>
 	endwhile;
 	?>
 
+	<?php
+	while(have_posts() ):the_post();
+	the_secondary_content();
+	endwhile;
+	?>
+
 </div>
 <div id="galeria">
 
@@ -35,7 +41,7 @@ get_header();?>
 			the_post();
 			foreach( get_cfc_meta( 'my_meta_gallery' ) as $key => $value )
 			{
-				?><img src="<?php/* the_cfc_field( 'my_meta_gallery','zdjecia', false, $key ); */?>"/><?php
+				?><img src="<?php the_cfc_field( 'my_meta_gallery','zdjecia', false, $key ); ?>"/><?php
 			}
 		}
 	}	
