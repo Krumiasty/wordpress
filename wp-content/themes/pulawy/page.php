@@ -103,12 +103,53 @@ endwhile;
 			while ( have_posts() )
 			{
 				the_post();
-                $tmp = get_post_meta($post ->ID, 'my_meta_player', true);
+                /*$tmp = get_post_meta($post ->ID, 'my_meta_player', true);
                 foreach($tmp as $tmp_meta)
                 {
-                	$tmp_metaa = wp_get_attachment_image_src( $tmp_meta[0]['film'], 'full' );
+                	$tmp_metaa = wp_get_attachment_image_src( $tmp_meta['film'], 'full' );
                      echo $tmp_metaa;
-                }
+                }*/
+		
+				 				
+				foreach( get_cfc_meta( 'my_meta_gallery' ) as $key => $value )
+				{
+    				?><img src="<?php the_cfc_field( 'my_meta_gallery','zdjecia', false, $key ); ?>"/><?php
+				}
+				
+
+			}
+		}	
+		else
+		{
+			echo 'post not found';
+		}
+		?>
+</div>
+<div>
+
+		<?php
+		if (have_posts())
+		{
+
+		
+			while ( have_posts() )
+			{
+				the_post();
+                /*$tmp = get_post_meta($post ->ID, 'my_meta_player', true);
+                foreach($tmp as $tmp_meta)
+                {
+                	$tmp_metaa = wp_get_attachment_image_src( $tmp_meta['film'], 'full' );
+                     echo $tmp_metaa;
+                }*/
+		
+				 				
+				foreach( get_cfc_meta( 'my_meta_player' ) as $key => $value )
+				{
+					$tmp = the_cfc_field( 'my_meta_player','film', false, $key );
+    				echo  $tmp;
+				}
+				
+
 			}
 		}	
 		else
@@ -117,21 +158,37 @@ endwhile;
 		}
 		?>
 
+
+
 	<script type="text/javascript">
+
 	var flashvars = {};
 	
 		/* flv player parameters */		
 		flashvars.playerpath = ""; 				
-		flashvars.contentpath = "../flvplayer/content";	
+		flashvars.contentpath = "/wordpress/flvplayer/content";	
 		
-		flashvars.video = "demo-video.flv";
-		flashvars.preview = "demo-preview.jpg";						
+	//	flashvars.video = "demo-video.flv";
+	/*	flashvars.video = "<?php 
+			while ( have_posts() )
+			{
+				the_post();
+			foreach( get_cfc_meta( 'my_meta_player' ) as $key => $value )
+				{
+					$tmp = the_cfc_field( 'my_meta_player','film', false, $key );
+    				echo  $tmp;
+				}
+			}
+		?>"; */
+		flashvars.video = "/wordpress/demo-video.flv";
+
+		flashvars.preview = "/wordpress/flvplayer/demo-preview.jpg";						
 		
 	    flashvars.skin = "skin-applestyle.swf";
 		flashvars.skincolor = "0x2c8cbd";
 		flashvars.skinscalemaximum = "1";				
 	
-		flashvars.captions = "demo-captions.xml";
+		flashvars.captions = "/wordpress/flvplayer/demo-captions.xml";
 		
 		// ...
 		//see documentation for all the parameters
@@ -152,7 +209,7 @@ endwhile;
 	/* embed flv player */			
 	// adapt the path to flvplayer.swf and expressInstall.swf
 	// adapt the display size of the flash file	
-	swfobject.embedSWF("../flvplayer/flvplayer.swf", "videoPlayer", "650", "530", "9.0.28", "../flvplayer/expressInstall.swf", flashvars, params, attributes);
+	swfobject.embedSWF("wordpress/flvplayer/flvplayer.swf", "videoPlayer", "650", "530", "9.0.28", "wordpress/flvplayer/expressInstall.swf", flashvars, params, attributes);
 	/* end */	
 	
 	</script>

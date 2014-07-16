@@ -11,20 +11,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" 
 <?php language_attributes(); ?>>
 <!--<![endif]-->
-<?php
-/**
- * The Header for our theme
- *
- * Displays all of the <head> section and everything up till <div id="main">
- *
- * @package WordPress
- * @subpackage pulawy
- * @since Twenty Fourteen 1.0
- */
-wp_head();
-?>
+
+<script type="text/javascript" src="<?php bloginfo('template_url');?>/js/swfobject.js"></script>
+<?php wp_head(); ?>
 
 	<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>    
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />        
+    
 </head>
 <body>
