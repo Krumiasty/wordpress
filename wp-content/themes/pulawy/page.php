@@ -23,7 +23,8 @@ get_header();?>
 	the_content();
 	endwhile;
 	?>
-
+</div>
+<div id="tresc2">
 	<?php
 	while(have_posts() ):the_post();
 	the_secondary_content();
