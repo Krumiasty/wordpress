@@ -12,209 +12,138 @@
  */
 
 get_header();?> 
-<script type="text/javascript">  
+
+<div id="mapka" style="width: 700px; height: 500px; border: 1px solid black; background: gray;">  
+	<!-- tu będzie mapa -->  
+</div> 
+
+<div id="tresc">
+	<?php
+	while(have_posts() ):the_post();
+	the_content();
+	endwhile;
+	?>
+
+</div>
+<div id="galeria">
+
+	<?php
+	if (have_posts())
+	{		
+		while ( have_posts() )
+		{
+			the_post();
+			foreach( get_cfc_meta( 'my_meta_gallery' ) as $key => $value )
+			{
+				?><img src="<?php/* the_cfc_field( 'my_meta_gallery','zdjecia', false, $key ); */?>"/><?php
+			}
+		}
+	}	
+	else
+	{
+		echo 'post not found';
+	}
+	?>
+</div>
+<div id="player">
+
+</div>
+<div id="myElement">Loading the player...</div>
+<script type="text/javascript">
+    jwplayer("myElement").setup({
+        file: "<?php
+if (have_posts())
+{
+	while ( have_posts() )
+	{
+		the_post();
+		foreach( get_cfc_meta( 'my_meta_player' ) as $key => $value )
+		{
+			$tmp = the_cfc_field( 'my_meta_player','film', false, $key );
+			echo  $tmp;
+		}
+	}
+}	
+else
+{
+	echo 'post not found';
+}
+?>",
+        image: "<?php
+if (have_posts())
+{
+	while ( have_posts() )
+	{
+		the_post();
+		foreach( get_cfc_meta( 'my_meta_player' ) as $key => $value )
+		{
+			$tmp = the_cfc_field( 'my_meta_player','grafika', false, $key );
+			echo  $tmp;
+		}
+	}
+}	
+else
+{
+	echo 'post not found';
+}
+?>",
+        width: 640,
+        height: 360
+    });
+</script>
+	<script type="text/javascript">  
             var mapa; // obiekt globalny
             function mapaStart() 
             { 
                 // tworzymy mapę satelitarną i centrujemy w okolicy Szczecina na poziomie zoom = 10
                 var wspolrzedne = new google.maps.LatLng(51.418886, 21.969609);
                 var opcjeMapy = {
-                    zoom: 11,
-                    center: wspolrzedne,
+                	zoom: 11,
+                	center: wspolrzedne
                 };
                 mapa = new google.maps.Map(document.getElementById("mapka"), opcjeMapy);
-                 
+
             } 
 
             function drawMarker(lat, lng, options)
             {
-                options.position = new google.maps.LatLng(lat, lng);
+            	options.position = new google.maps.LatLng(lat, lng);
 
-                options.map = mapa;
-                var marker = new google.maps.Marker(options);
+            	options.map = mapa;
+            	var marker = new google.maps.Marker(options);
             }
-        </script>  
-        <div id="mapka" style="width: 700px; height: 500px; border: 1px solid black; background: gray;">  
-        <!-- tu będzie mapa -->  
-        </div> 
-<script type="text/javascript">  
+            </script>
+	<script type="text/javascript">  
 
-    window.onload = mapaStart();
+	mapaStart();
 	<?php
-        if ( have_posts() ) 
-        {
-                    
-            while ( have_posts() ) 
-            {
-                the_post();
+	if ( have_posts() ) 
+	{
 
-                $tmp = get_post_meta($post ->ID, '_my_meta', true);
-                foreach($tmp as $tmp_meta)
-                {
-                    $tmp_meta = substr($tmp_meta, 0, (strlen($tmp_meta)-1));
-                    echo 'drawMarker' . $tmp_meta .', {});';
-                }
-            }
-        }
-        else 
-        {
-            echo 'no posts found';
-        }
-        /* Restore original Post Data */
-        wp_reset_postdata();
-
-	?>
-	</script>
-	<div>
-
-	<!--	<script type="text/javascript">  
-		<?php
-	/*	if ( have_posts() )
+		while ( have_posts() ) 
 		{
-			while( have_posts() )
+			the_post();
+
+			$tmp = get_post_meta($post ->ID, '_my_meta', true);
+			foreach($tmp as $tmp_meta)
 			{
-				$tmp2 = get_post_meta($post ->ID, 'my_meta_gallery', true);
-        		foreach($tmp2 as $tmp_meta2)
-        		{
-          			echo $tmp_meta2 ;
-       		 	}
-			}
-		}
-		else
-		{
-			echo 'no posts found';
-		} */
-		?>
-</script> -->
-</div>
-<?php
-while(have_posts() ):the_post();
-	the_content();
-endwhile;
-?>
-
-<div>
-
-		<?php
-		if (have_posts())
-		{
-
-		
-			while ( have_posts() )
-			{
-				the_post();
-                /*$tmp = get_post_meta($post ->ID, 'my_meta_player', true);
-                foreach($tmp as $tmp_meta)
-                {
-                	$tmp_metaa = wp_get_attachment_image_src( $tmp_meta['film'], 'full' );
-                     echo $tmp_metaa;
-                }*/
-		
-				 				
-				foreach( get_cfc_meta( 'my_meta_gallery' ) as $key => $value )
-				{
-    				?><img src="<?php the_cfc_field( 'my_meta_gallery','zdjecia', false, $key ); ?>"/><?php
-				}
-				
-
-			}
-		}	
-		else
-		{
-			echo 'post not found';
-		}
-		?>
-</div>
-<div>
-
-		<?php
-		if (have_posts())
-		{
-
-		
-			while ( have_posts() )
-			{
-				the_post();
-                /*$tmp = get_post_meta($post ->ID, 'my_meta_player', true);
-                foreach($tmp as $tmp_meta)
-                {
-                	$tmp_metaa = wp_get_attachment_image_src( $tmp_meta['film'], 'full' );
-                     echo $tmp_metaa;
-                }*/
-		
-				 				
-				foreach( get_cfc_meta( 'my_meta_player' ) as $key => $value )
-				{
-					$tmp = the_cfc_field( 'my_meta_player','film', false, $key );
-    				echo  $tmp;
-				}
-				
-
-			}
-		}	
-		else
-		{
-			echo 'post not found';
-		}
-		?>
-
-
-
-	<script type="text/javascript">
-
-	var flashvars = {};
-	
-		/* flv player parameters */		
-		flashvars.playerpath = ""; 				
-		flashvars.contentpath = "/wordpress/flvplayer/content";	
-		
-	//	flashvars.video = "demo-video.flv";
-	/*	flashvars.video = "<?php 
-			while ( have_posts() )
-			{
-				the_post();
-			foreach( get_cfc_meta( 'my_meta_player' ) as $key => $value )
-				{
-					$tmp = the_cfc_field( 'my_meta_player','film', false, $key );
-    				echo  $tmp;
-				}
-			}
-		?>"; */
-		flashvars.video = "/wordpress/demo-video.flv";
-
-		flashvars.preview = "/wordpress/flvplayer/demo-preview.jpg";						
-		
-	    flashvars.skin = "skin-applestyle.swf";
-		flashvars.skincolor = "0x2c8cbd";
-		flashvars.skinscalemaximum = "1";				
-	
-		flashvars.captions = "/wordpress/flvplayer/demo-captions.xml";
-		
-		// ...
-		//see documentation for all the parameters
-		
-		
-		/* end */		
-					
-		var params = {};
-			params.scale = "noscale";
-			params.allowfullscreen = "true";
-			params.salign = "tl";   
-   		 	params.base = ".";  
-		
-		var attributes = {};
-			attributes.align = "left";   
-		   
-		
-	/* embed flv player */			
-	// adapt the path to flvplayer.swf and expressInstall.swf
-	// adapt the display size of the flash file	
-	swfobject.embedSWF("wordpress/flvplayer/flvplayer.swf", "videoPlayer", "650", "530", "9.0.28", "wordpress/flvplayer/expressInstall.swf", flashvars, params, attributes);
-	/* end */	
-	
-	</script>
-	
-</div>
-<?php get_footer();
+				$tmp_meta = substr($tmp_meta, 0, (strlen($tmp_meta)-1));
+				echo 'drawMarker' . $tmp_meta .', {});';
+}
+}
+}
+else 
+{
+	echo 'no posts found';
+}
+/* Restore original Post Data */
+wp_reset_postdata();
 
 ?>
+</script>
+
+
+
+
+
+            <?php get_footer();    ?>
