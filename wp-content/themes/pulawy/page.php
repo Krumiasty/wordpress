@@ -13,28 +13,28 @@
 
 get_header();?> 
 
-<div id="mapka" style="width: 700px; height: 500px; border: 1px solid black; background: gray;">  
+<div id="mapka">  
 	<!-- tu będzie mapa -->  
 </div> 
 
 <div id="tresc">
-	<?php
+<?php
 	while(have_posts() ):the_post();
 	the_content();
 	endwhile;
-	?>
+?>
 </div>
 <div id="tresc2">
-	<?php
+<?php
 	while(have_posts() ):the_post();
 	the_secondary_content();
 	endwhile;
-	?>
+?>
 
 </div>
 <div id="galeria">
 
-	<?php
+<?php
 	if (have_posts())
 	{		
 		while ( have_posts() )
@@ -46,11 +46,7 @@ get_header();?>
 			}
 		}
 	}	
-	else
-	{
-		echo 'post not found';
-	}
-	?>
+?>
 </div>
 <div id="player">
 
@@ -100,12 +96,11 @@ else
 </script>
 
 <div id="ws">
-	<?php
+<?php
 	if (have_posts())
 	{		
 		while (have_posts())
 		{
-
 			the_post();
 			$ws = get_post_meta($post->ID, 'my_meta_ws', true);
 			if($ws ==! 0)
@@ -123,17 +118,12 @@ else
 			}	
 		}
 	}
-	?>
+?>
 </div>
-
-	<script type="text/javascript">  
-       
-       
-            </script>
 	<script type="text/javascript">  
 
 	mapaStart();
-	<?php
+<?php
 	if ( have_posts() ) 
 	{
 
@@ -149,10 +139,6 @@ else
 			}
 		}
 	}
-else 
-{
-	echo 'no posts found';
-}
 /* Restore original Post Data */
 wp_reset_postdata();
 
