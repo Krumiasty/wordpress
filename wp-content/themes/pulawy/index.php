@@ -6,7 +6,7 @@ get_header();
             var mapa; // obiekt globalny
             function mapaStart() 
             { 
-                // tworzymy mapę satelitarną i centrujemy w okolicy Szczecina na poziomie zoom = 10
+                // tworzymy mapę satelitarną i centrujemy w okolicy Pulaw na poziomie zoom = 11
                 var wspolrzedne = new google.maps.LatLng(51.418886, 21.969609);
                 var opcjeMapy = {
                     zoom: 11,
