@@ -1,5 +1,5 @@
 <div class="my_meta_control">
-      <div id="mapka">  
+      <div id="mapka" style="width: 700px; height: 500px; border: 1px solid black; background: gray;">  
         <!-- tu będzie mapa -->  
         </div> 
      <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
@@ -36,6 +36,14 @@
                         flag = false;
                     }
                   
+                    
+                 /*   google.maps.event.addListener(marker, "click", function()
+                    {
+                        infowindow.open(mapa, marker);
+                        
+                    }
+                    );*/
+
                     coords = document.getElementById("xx");
                     coords.value = latlng_num;
                 }
@@ -45,18 +53,14 @@
         </script>
     <p> </p>
     <label>Współrzędne</label>
+    <!-- " -->
     <p>
-        <input id="xx" type="text" name="_my_meta[name]" value="<?php if(!empty($meta['name'])) 
-                                                                        echo $meta['name']; ?>"/>
+        <input id="xx" type="text" name="_my_meta[name]" value="<?php if(!empty($meta['name'])) echo $meta['name']; ?>"/>
     <!--    <span>wpowadzone współrzędne</span> -->
     </p>
     <label>Opis</label>
     <p>
         <textarea name="_my_meta[description]" rows="3">
-            <?php 
-            if(!empty($meta['description'])) 
-                echo $meta['description'];
-                 ?>
-        </textarea>
+            <?php if(!empty($meta['description'])) echo $meta['description']; ?></textarea>
     </p>
 </div>
