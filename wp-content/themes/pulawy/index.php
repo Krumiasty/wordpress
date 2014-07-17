@@ -1,29 +1,7 @@
 <?php
 get_header();
 ?>
-           
-        <script type="text/javascript">  
-            var mapa; // obiekt globalny
-            function mapaStart() 
-            { 
-                // tworzymy mapę satelitarną i centrujemy w okolicy Pulaw na poziomie zoom = 11
-                var wspolrzedne = new google.maps.LatLng(51.418886, 21.969609);
-                var opcjeMapy = {
-                    zoom: 11,
-                    center: wspolrzedne,
-                };
-                mapa = new google.maps.Map(document.getElementById("mapka"), opcjeMapy);
-                 
-            } 
-
-            function drawMarker(lat, lng, options)
-            {
-                options.position = new google.maps.LatLng(lat, lng);
-
-                options.map = mapa;
-                var marker = new google.maps.Marker(options);
-            }
-        </script>  
+            
         <div id="mapka" style="width: 700px; height: 500px; border: 1px solid black; background: gray;">  
         <!-- tu będzie mapa -->  
         </div> 
@@ -34,8 +12,7 @@ get_header();
             <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
             <script type="text/javascript">  
 
-        	   window.onload = mapaStart();
-               var marker;
+        	   mapaStart();
 
                 <?php
                 $args=array(
@@ -60,10 +37,6 @@ get_header();
                             echo 'drawMarker' . $tmp_meta .', {});';
                         }
                     }
-                }
-                else 
-                {
-                    echo 'no posts found';
                 }
                     /* Restore original Post Data */
                 wp_reset_postdata();
