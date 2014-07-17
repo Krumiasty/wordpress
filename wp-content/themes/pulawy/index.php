@@ -2,13 +2,11 @@
 get_header();
 ?>
             
-        <div id="mapka" style="width: 700px; height: 500px; border: 1px solid black; background: gray;">  
+        <div id="mapka">  
         <!-- tu będzie mapa -->  
         </div> 
-        <div>
-              <div>
-               
-                </div>
+
+        </div>
             <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
             <script type="text/javascript">  
 
