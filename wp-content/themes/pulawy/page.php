@@ -24,7 +24,7 @@ get_header();?>
 	endwhile;
 ?>
 </div>
-<div id="tresc2">
+<div id="galeria">
 <?php
 	while(have_posts() ):the_post();
 	the_secondary_content();
@@ -32,22 +32,7 @@ get_header();?>
 ?>
 
 </div>
-<div id="galeria">
 
-<?php
-	if (have_posts())
-	{		
-		while ( have_posts() )
-		{
-			the_post();
-			foreach( get_cfc_meta( 'my_meta_gallery' ) as $key => $value )
-			{
-				?><img src="<?php the_cfc_field( 'my_meta_gallery','zdjecia', false, $key ); ?>"/><?php
-			}
-		}
-	}	
-?>
-</div>
 <div id="player">
 
 </div>
