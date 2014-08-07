@@ -120,7 +120,7 @@ else
 			foreach($tmp as $tmp_meta)
 			{
 				$tmp_meta = substr($tmp_meta, 0, (strlen($tmp_meta)-1));
-				echo 'drawMarker' . $tmp_meta .', {});';
+				echo 'drawMarker' . $tmp_meta .', null ,{});';
 			}
 		}
 	}

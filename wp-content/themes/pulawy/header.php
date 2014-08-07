@@ -38,12 +38,34 @@
             	center: wspolrzedne,
         	};
        		mapa = new google.maps.Map(document.getElementById("mapka"), opcjeMapy);    
+
+            
     	} 
-    	function drawMarker(lat, lng, options)
+    	function drawMarker(lat, lng, cont, options)
     	{
         	options.position = new google.maps.LatLng(lat, lng);
-
         	options.map = mapa;
-        	var marker = new google.maps.Marker(options);
+            var zawartosc = "cossss";
+
+            var marker = new google.maps.Marker(options);
+            marker.setMap(mapa);
+
+            var infowindow = new google.maps.InfoWindow(
+                        {
+                           content: cont
+                        }
+                        );
+
+                        google.maps.event.addListener(marker, 'mouseover', function()
+                        {
+                            infowindow.open(mapa, marker);
+                        }
+                        );
+
+                        google.maps.event.addListener(marker, 'mouseout', function()
+                        {
+                            infowindow.close(mapa, marker);
+                        }
+                        );
     	}
     	</script>

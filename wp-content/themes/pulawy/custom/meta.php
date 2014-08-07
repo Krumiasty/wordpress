@@ -1,10 +1,11 @@
 <div class="my_meta_control">
-      <div id="mapka">  
+      <div id="mapka" style= "height:500px; width:100%;">  
         <!-- tu będzie mapa -->  
         </div> 
      <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
       <script type="text/javascript">  
-         window.onload = mapaStart();
+
+      // window.onload = mapaStart();
             var mapa; // obiekt globalny
             var flag = true;
             function mapaStart() 
@@ -29,7 +30,26 @@
                         marker = new google.maps.Marker(
                         {
                             position: event.latLng,
-                            map: mapa,
+                          //  map: mapa,
+                        }
+                        );
+                        marker.setMap(mapa);
+
+                        var infowindow = new google.maps.InfoWindow(
+                        {
+                            content:"Hello World !"
+                        }
+                        );
+
+                        google.maps.event.addListener(marker, 'mouseover', function()
+                        {
+                            infowindow.open(mapa, marker);
+                        }
+                        );
+
+                        google.maps.event.addListener(marker, 'mouseout', function()
+                        {
+                            infowindow.close(mapa, marker);
                         }
                         );
                         var latlng_num = event.latLng;
@@ -41,7 +61,7 @@
                 }
                 );
             }; 
-       
+        google.maps.event.addDomListener(window, 'load', mapaStart);
         </script>
     <p> </p>
     <label>Współrzędne</label>
