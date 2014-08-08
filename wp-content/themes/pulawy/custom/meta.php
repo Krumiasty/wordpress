@@ -8,6 +8,7 @@
       // window.onload = mapaStart();
             var mapa; // obiekt globalny
             var flag = true;
+            var oldflag = true;
             function mapaStart() 
             { 
                 // tworzymy mapę satelitarną i centrujemy w okolicy Pulaw na poziomie zoom = 11
@@ -18,8 +19,45 @@
                 };
                 mapa = new google.maps.Map(document.getElementById("mapka"), opcjeMapy);
 
+                if(oldflag)
+                {
+                    <?php if(!empty($meta['name'])) 
+                        ?> var oldpos = new google.maps.LatLng<?php echo $meta['name']; ?>;
+                    var oldmarker = new google.maps.Marker(
+                    {
+                        position: oldpos
+                    }
+                    );
+
+                    var infowindow = new google.maps.InfoWindow(
+                    {
+                        content:"stary znacznik .  "
+                    }
+                    );
+
+                    google.maps.event.addListener(oldmarker, 'mouseover', function()
+                    {
+                        infowindow.open(mapa, oldmarker);
+                    }
+                    );
+
+                    google.maps.event.addListener(oldmarker, 'mouseout', function()
+                    {
+                        infowindow.close(mapa, oldmarker);
+                    }
+                    );
+                oldmarker.setMap(mapa);
+                oldflag = false;
+                }
+               
+
+
                 google.maps.event.addListener(mapa, "click", function(event)
                 {   
+                    if(oldflag == false)
+                    {
+                        oldmarker.setMap(null);
+                    }
                     if(flag == false)
                     {
                         marker.setMap(null);
@@ -30,14 +68,13 @@
                         marker = new google.maps.Marker(
                         {
                             position: event.latLng,
-                          //  map: mapa,
                         }
                         );
                         marker.setMap(mapa);
 
                         var infowindow = new google.maps.InfoWindow(
                         {
-                            content:"Hello World !"
+                            content:"nowy znacznik .   "
                         }
                         );
 

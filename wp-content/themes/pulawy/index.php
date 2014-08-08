@@ -29,11 +29,15 @@ get_header();
                         $the_query->the_post();
 
                         $tmp = get_post_meta($post ->ID, '_my_meta', true);
-                        foreach($tmp as $tmp_meta)
+                        if($tmp)
                         {
-                            $tmp_meta = substr($tmp_meta, 0, (strlen($tmp_meta)-1));
-                            echo 'drawMarker' . $tmp_meta .', "'.get_the_title().'", {});';
+                            foreach($tmp as $tmp_meta)
+                            {
+                                $tmp_meta = substr($tmp_meta, 0, (strlen($tmp_meta)-1));
+                                echo 'drawMarker' . $tmp_meta .', "'.get_the_title().'", {});';
+                            }
                         }
+                        
                     }
                 }
                     /* Restore original Post Data */
